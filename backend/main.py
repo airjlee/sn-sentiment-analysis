@@ -39,3 +39,6 @@ for ticker, news_table in news_tables.items():
                 parsed_data.append([ticker, date, time, title])
 
 df = pd.DataFrame(parsed_data, columns=['Ticker', 'Date', 'Time', 'Title'])
+vader = SentimentIntensityAnalyzer()
+
+df['compound'] = df['Title'].apply(lambda title: vader.polarity_scores(title)['compound'])
